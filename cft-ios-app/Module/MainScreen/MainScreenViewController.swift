@@ -3,6 +3,7 @@ import CoreData
 
 protocol IMainScreenController: AnyObject {
     func configureNavBar(title: String)
+	func showAlert(message: String)
 }
 
 final class MainScreenViewController: UIViewController {
@@ -33,6 +34,12 @@ final class MainScreenViewController: UIViewController {
 }
 
 extension MainScreenViewController: IMainScreenController {
+	func showAlert(message: String) {
+		let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+		self.present(alert, animated: true, completion: nil)
+	}
+
     func configureNavBar(title: String) {
         self.title = title
         let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainRed,

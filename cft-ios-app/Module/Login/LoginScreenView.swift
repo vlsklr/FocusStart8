@@ -56,6 +56,14 @@ final class LoginScreenView: UIView {
 		return view
 	}()
 
+	private lazy var counter: UILabel = {
+		var view = UILabel()
+		view.font = UIFont.systemFont(ofSize: 12)
+		view.textColor = .red
+		view.textAlignment = .center
+		return view
+	}()
+
 	override init(frame: CGRect = CGRect.zero) {
 		super.init(frame: frame)
 		self.backgroundColor = .white
@@ -71,6 +79,10 @@ final class LoginScreenView: UIView {
 		self.spinner.isHidden = progress == false
 		progress ? self.spinner.startAnimating() : self.spinner.stopAnimating()
 	}
+
+	func set(users: String) {
+		self.counter.text = users
+	}
 }
 
 private extension LoginScreenView {
@@ -81,6 +93,7 @@ private extension LoginScreenView {
 		self.container.addArrangedSubview(self.signinButton)
 		self.container.addArrangedSubview(self.loginButton)
 		self.addSubview(self.spinner)
+		self.addSubview(self.counter)
 	}
 
 	private func makeConstraints() {
@@ -91,6 +104,10 @@ private extension LoginScreenView {
 		self.spinner.snp.makeConstraints { maker in
 			maker.size.equalToSuperview()
 			maker.center.equalToSuperview()
+		}
+		self.counter.snp.makeConstraints { maker in
+			maker.centerX.equalToSuperview()
+			maker.top.equalTo(self.container.snp.bottom).offset(30)
 		}
 	}
 

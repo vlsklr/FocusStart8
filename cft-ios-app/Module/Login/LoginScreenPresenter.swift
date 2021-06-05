@@ -18,6 +18,7 @@ final class LoginScreenPresenter: ILoginScreenPresenter {
 
 	func viewDidLoad(uiView: ILoginScreenView) {
 		self.uiView = uiView
+		self.uiView?.set(users: self.getCountTitle())
 	}
 }
 
@@ -49,5 +50,11 @@ extension LoginScreenPresenter: ILoginScreenViewDelegate {
 			self.uiView?.set(progress: false)
 			self.router.openMainScreen(user: newUser)
 		})
+	}
+}
+
+private extension LoginScreenPresenter {
+	func getCountTitle() -> String {
+		return "Users in system: \(self.userStorage.usersCount())"
 	}
 }

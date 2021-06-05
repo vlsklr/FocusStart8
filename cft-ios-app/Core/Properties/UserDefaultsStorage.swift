@@ -25,7 +25,7 @@ final class UserDefaultsStorage: IUserDefaultsStorage {
 			fatalError("Не реализовано")
 		}
 		set {
-			fatalError("Не реализовано")
+			fatalError("Не реализовано \(newValue)")
 		}
 	}
 }

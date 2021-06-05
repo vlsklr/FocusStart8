@@ -4,6 +4,7 @@ import CoreData
 
 protocol INoteScreenController: AnyObject {
     func configureNavBar(button: String)
+	func showAlert(message: String)
 }
 
 final class NoteScreenViewController: UIViewController {
@@ -40,6 +41,12 @@ extension NoteScreenViewController: INoteScreenController {
         self.navigationItem.rightBarButtonItem = rightBarButton
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.mainRed
     }
+
+	func showAlert(message: String) {
+		let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+		self.present(alert, animated: true, completion: nil)
+	}
 
     @objc func saveNote() {
         self.presenter.saveNote()

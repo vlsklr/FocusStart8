@@ -42,15 +42,19 @@ extension NoteScreenPresenter: INoteScreenPresenter {
 	func saveNoteInStorage(title: String, text: String) {
 		if self.isEditMode, let noteData = self.noteData {
 			noteData.update(title: title, text: text)
-			self.noteStorage.update(note: noteData, completion: {
+			self.noteStorage.update(note: noteData, completion: { _ in
 				self.center.post(name: Notification.Name.updateNotification, object: nil)
 				self.router.goBack()
 			})
 		} else {
 			let note = NoteModel(holder: self.user.uid, title: title, text: text)
-			self.noteStorage.create(note: note, completion: {
-				self.center.post(name: Notification.Name.updateNotification, object: nil)
-				self.router.goBack()
+			self.noteStorage.create(note: note, completion: { error in
+				if error == nil {
+					self.center.post(name: Notification.Name.updateNotification, object: nil)
+					self.router.goBack()
+				} else {
+					self.controller?.showAlert(message: "Ошибка создания записи")
+				}
 			})
 		}
 	}

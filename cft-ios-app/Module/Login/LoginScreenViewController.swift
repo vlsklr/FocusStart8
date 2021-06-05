@@ -2,6 +2,7 @@ import UIKit
 
 protocol ILoginScreenView: AnyObject {
 	func set(progress: Bool)
+	func set(users: String)
 	func showAlert(message: String)
 }
 
@@ -31,6 +32,10 @@ final class LoginScreenViewController: UIViewController {
 }
 
 extension LoginScreenViewController: ILoginScreenView {
+	func set(users: String) {
+		self.customView.set(users: users)
+	}
+
 	func showAlert(message: String) {
 		let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
