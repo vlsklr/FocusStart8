@@ -1,0 +1,6 @@
+identifier_name:
+  min_length: 3
+  excluded: # excluded via string array
+    - id
+    - vm
+line_length: 200
