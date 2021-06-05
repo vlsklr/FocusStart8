@@ -22,6 +22,7 @@
 		C24865C4266A4D7900685A71 /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24865C3266A4D7900685A71 /* LoginScreenView.swift */; };
 		C24865C6266A4DC500685A71 /* LoginScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24865C5266A4DC500685A71 /* LoginScreenPresenter.swift */; };
 		C24865C9266A4E8E00685A71 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C24865C8266A4E8E00685A71 /* SnapKit */; };
+		C25CB65A266B6050007537D8 /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25CB659266B6050007537D8 /* BackupManager.swift */; };
 		C2613279266A6FFA0088D6D2 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = C2613278266A6FFA0088D6D2 /* Swinject */; };
 		C261327B266A716C0088D6D2 /* StorageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C261327A266A716C0088D6D2 /* StorageFactory.swift */; };
 		C261327D266A717C0088D6D2 /* ConfigurationReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C261327C266A717C0088D6D2 /* ConfigurationReader.swift */; };
@@ -60,6 +61,7 @@
 		C24865C1266A4CFB00685A71 /* LoginScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenRouter.swift; sourceTree = "<group>"; };
 		C24865C3266A4D7900685A71 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
 		C24865C5266A4DC500685A71 /* LoginScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenPresenter.swift; sourceTree = "<group>"; };
+		C25CB659266B6050007537D8 /* BackupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManager.swift; sourceTree = "<group>"; };
 		C261327A266A716C0088D6D2 /* StorageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageFactory.swift; sourceTree = "<group>"; };
 		C261327C266A717C0088D6D2 /* ConfigurationReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationReader.swift; sourceTree = "<group>"; };
 		C261327F266A71B80088D6D2 /* Configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				980A1CC525FCC09A00F2A71D /* Extensions.swift */,
+				C25CB659266B6050007537D8 /* BackupManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -153,8 +156,8 @@
 			children = (
 				C24865BF266A4CC800685A71 /* LoginScreenAssembly.swift */,
 				C24865BD266A4BF600685A71 /* LoginScreenViewController.swift */,
-				C24865C5266A4DC500685A71 /* LoginScreenPresenter.swift */,
 				C24865C3266A4D7900685A71 /* LoginScreenView.swift */,
+				C24865C5266A4DC500685A71 /* LoginScreenPresenter.swift */,
 				C24865C1266A4CFB00685A71 /* LoginScreenRouter.swift */,
 			);
 			path = Login;
@@ -351,6 +354,7 @@
 				C24865BE266A4BF600685A71 /* LoginScreenViewController.swift in Sources */,
 				F8CD9F68265062D200B6EE06 /* MainScreenAssembly.swift in Sources */,
 				F804BB35265842F90054FD93 /* MainScreenRouter.swift in Sources */,
+				C25CB65A266B6050007537D8 /* BackupManager.swift in Sources */,
 				F8AD6C44264DB42100517C57 /* NoteModel.swift in Sources */,
 				C261327B266A716C0088D6D2 /* StorageFactory.swift in Sources */,
 				F8AD6C3B264D984B00517C57 /* INoteStorage.swift in Sources */,

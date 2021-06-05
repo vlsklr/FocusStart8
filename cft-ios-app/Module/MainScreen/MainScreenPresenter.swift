@@ -3,6 +3,7 @@ import Foundation
 protocol IMainScreenPresenter: MainScreenTableAdapterDelegate {
 	func viewDidLoad(adapter: IMainScreenTableAdapter, controller: IMainScreenController)
 	func createNote()
+	func makeBackup()
 }
 
 final class MainScreenPresenter {
@@ -12,13 +13,15 @@ final class MainScreenPresenter {
 	private let notesStorage: INoteStorage
 	private let center: NotificationCenter
 	private let configurationReader: IConfigurationReader
+	private let backupManager: IBackupManager
 	private let user: UserModel
 	private var notes: [NoteModel] = []
-	init(router: IMainScreenRouter, notesStorage: INoteStorage, configurationReader: IConfigurationReader, center: NotificationCenter, user: UserModel) {
+	init(router: IMainScreenRouter, notesStorage: INoteStorage, configurationReader: IConfigurationReader, backupManager: IBackupManager, center: NotificationCenter, user: UserModel) {
 		self.router = router
 		self.notesStorage = notesStorage
 		self.configurationReader = configurationReader
 		self.center = center
+		self.backupManager = backupManager
 		self.user = user
 		self.center.addObserver(self, selector: #selector(reloadNotes),
 								name: Notification.Name.updateNotification,
@@ -37,6 +40,15 @@ final class MainScreenPresenter {
 }
 
 extension MainScreenPresenter: IMainScreenPresenter {
+	func makeBackup() {
+		do {
+			let path = try self.backupManager.backup(for: self.user)
+			self.router.shareFile(path: path)
+		} catch {
+			self.controller?.showAlert(message: "Не удалось выполнить операцию")
+		}
+	}
+
 	func viewDidLoad(adapter: IMainScreenTableAdapter, controller: IMainScreenController) {
 		self.adapter = adapter
 		self.controller = controller

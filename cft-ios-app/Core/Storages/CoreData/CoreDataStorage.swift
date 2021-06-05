@@ -19,7 +19,6 @@ final class CoreDataStorage {
 
 extension CoreDataStorage: INoteStorage {
 	func getNotes(for user: UserModel) throws -> [NoteModel] {
-
 		let calendar = Calendar.current
 		let currentYear = calendar.dateComponents([.year], from: Date())
 		let startOfThisYear = calendar.date(from: currentYear)!
@@ -77,7 +76,7 @@ extension CoreDataStorage: INoteStorage {
 			let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
 			fetchRequest.predicate = NSPredicate(format: "\(#keyPath(Note.uid)) = %@", note.uid.uuidString)
 			do {
-				if let object = try? context.fetch(fetchRequest).first {
+				if let object = try context.fetch(fetchRequest).first {
 					context.delete(object)
 					try context.save()
 				}

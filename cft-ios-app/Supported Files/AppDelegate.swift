@@ -67,5 +67,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			return storage
 		}
 		.inObjectScope(.container)
+
+		AppDelegate.container.register(IBackupManager.self) { resolver in
+			let noteStorage = resolver.resolve(INoteStorage.self)!
+			return BackupManager(fileManager: FileManager.default, storage: noteStorage)
+		}
 	}
 }

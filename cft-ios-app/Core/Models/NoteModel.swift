@@ -1,6 +1,6 @@
 import Foundation
 
-final class NoteModel {
+final class NoteModel: Encodable {
     let uid: UUID
 	let holder: UUID
 	private(set) var date: Date

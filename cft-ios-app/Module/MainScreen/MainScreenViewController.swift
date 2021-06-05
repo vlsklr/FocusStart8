@@ -44,17 +44,16 @@ extension MainScreenViewController: IMainScreenController {
         self.title = title
         let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.mainRed,
                                    NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 24)]
-        let backBarItem = UIBarButtonItem()
-        backBarItem.title = self.title
-        backBarItem.tintColor = UIColor.mainRed
         let rightBarItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createNote))
         rightBarItem.tintColor = UIColor.mainRed
+		let leftBarItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(backUpNotes))
+		leftBarItem.tintColor = UIColor.mainRed
         self.navigationController?.navigationBar.titleTextAttributes = titleTextAttributes
         self.navigationController?.navigationBar.barTintColor = .secondarySystemBackground
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.rightBarButtonItem = rightBarItem
-        self.navigationItem.backBarButtonItem = backBarItem
+		self.navigationItem.leftBarButtonItem = leftBarItem
     }
 }
 
@@ -62,4 +61,8 @@ private extension MainScreenViewController {
     @objc func createNote() {
         self.presenter.createNote()
     }
+
+	@objc func backUpNotes() {
+		self.presenter.makeBackup()
+	}
 }

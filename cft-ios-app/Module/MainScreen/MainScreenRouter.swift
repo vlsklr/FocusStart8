@@ -11,6 +11,7 @@ import UIKit
 protocol IMainScreenRouter: AnyObject {
     func createNote()
     func openNote(note: NoteModel)
+	func shareFile(path: URL)
 }
 
 final class MainScreenRouter: IMainScreenRouter {
@@ -30,4 +31,10 @@ final class MainScreenRouter: IMainScreenRouter {
 		let controller = NoteScreenAssembly().build(user: self.user, note: note)
         self.controller?.navigationController?.pushViewController(controller, animated: true)
     }
+
+	func shareFile(path: URL) {
+		let activityViewController = UIActivityViewController(activityItems: [path],
+															  applicationActivities: nil)
+		self.controller?.present(activityViewController, animated: true)
+	}
 }
