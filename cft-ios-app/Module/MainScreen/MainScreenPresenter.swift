@@ -28,6 +28,12 @@ final class MainScreenPresenter {
     deinit {
         self.center.removeObserver(self)
     }
+
+	private let timeFormatter: DateFormatter = {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "HH:mm:ss"
+		return formatter
+	}()
 }
 
 extension MainScreenPresenter: IMainScreenPresenter {
@@ -60,7 +66,10 @@ extension MainScreenPresenter: MainScreenTableAdapterDelegate {
 private extension MainScreenPresenter {
 	func displayNotes() {
 		self.notes = self.notesStorage.getNotes(for: self.user)
-		self.adapter?.update(notes: self.notes.map { MainScreenItemViewModel(id: $0.uid, title: $0.title, text: $0.text) })
+		self.adapter?.update(notes: self.notes.map { MainScreenItemViewModel(id: $0.uid,
+																			 title: $0.title,
+																			 text: $0.text,
+																			 date: self.timeFormatter.string(from: $0.date)) })
 	}
 
     @objc func reloadNotes() {

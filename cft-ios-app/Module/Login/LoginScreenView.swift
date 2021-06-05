@@ -22,6 +22,7 @@ final class LoginScreenView: UIView {
 		view.backgroundColor = .secondarySystemBackground
 		view.tintColor = UIColor.mainRed
 		view.placeholder = "Логин"
+		view.text = "Q"
 		return view
 	}()
 
@@ -30,6 +31,7 @@ final class LoginScreenView: UIView {
 		view.backgroundColor = .secondarySystemBackground
 		view.tintColor = UIColor.mainRed
 		view.placeholder = "Пароль"
+		view.text = "Q"
 		return view
 	}()
 

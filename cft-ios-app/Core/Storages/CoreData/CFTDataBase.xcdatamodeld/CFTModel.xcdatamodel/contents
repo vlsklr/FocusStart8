@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20E241" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Note" representedClassName="Note" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <attribute name="uid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -13,7 +14,7 @@
         <relationship name="note" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="holder" inverseEntity="Note"/>
     </entity>
     <elements>
-        <element name="Note" positionX="-48.8543701171875" positionY="-21.65667724609375" width="128" height="89"/>
+        <element name="Note" positionX="-48.8543701171875" positionY="-21.65667724609375" width="128" height="104"/>
         <element name="User" positionX="-118.7470092773438" positionY="-186.7384338378906" width="128" height="103"/>
     </elements>
 </model>

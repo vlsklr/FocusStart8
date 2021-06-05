@@ -19,8 +19,17 @@ final class CoreDataStorage {
 
 extension CoreDataStorage: INoteStorage {
 	func getNotes(for user: UserModel) -> [NoteModel] {
+
+		let calendar = Calendar.current
+		let currentYear = calendar.dateComponents([.year], from: Date())
+		let startOfThisYear = calendar.date(from: currentYear)!
+		let nextYear = DateComponents(year: currentYear.year! + 1)
+		let startOfNextYear = calendar.date(from: nextYear)!
+
 		let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
-		fetchRequest.predicate = NSPredicate(format: "ANY holder.uid = '\(user.uid)'")
+		// NSPredicate(format: "ANY holder.uid = '\(user.uid)' AND (title CONTAINS[c] '1' OR title CONTAINS[c] '2')
+		fetchRequest.predicate = NSPredicate(format: "ANY holder.uid = '\(user.uid)' AND \(#keyPath(Note.date)) >= %@ AND \(#keyPath(Note.date)) < %@", argumentArray: [startOfThisYear, startOfNextYear])
+		fetchRequest.sortDescriptors = [NSSortDescriptor(key: #keyPath(Note.date), ascending: false)]
 		return (try? self.container.viewContext.fetch(fetchRequest).compactMap { NoteModel(note: $0) }) ?? []
 	}
 
@@ -36,6 +45,7 @@ extension CoreDataStorage: INoteStorage {
 			object.uid = note.uid
 			object.title = note.title
 			object.text = note.text
+			object.date = note.date
 			object.holder = user
 			try? context.save()
 		}
@@ -48,6 +58,7 @@ extension CoreDataStorage: INoteStorage {
 			if let object = try? context.fetch(fetchRequest).first {
 				object.title = note.title
 				object.text = note.text
+				object.date = note.date
 			}
 			try? context.save()
 			DispatchQueue.main.async { completion() }
@@ -55,7 +66,15 @@ extension CoreDataStorage: INoteStorage {
 	}
 
 	func remove(note: NoteModel, completion: @escaping () -> Void) {
-		fatalError("Не реализовано")
+		self.container.performBackgroundTask { context in
+			let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+			fetchRequest.predicate = NSPredicate(format: "\(#keyPath(Note.uid)) = %@", note.uid.uuidString)
+			if let object = try? context.fetch(fetchRequest).first {
+				context.delete(object)
+				try? context.save()
+			}
+			DispatchQueue.main.async { completion() }
+		}
 	}
 }
 
